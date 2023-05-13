@@ -12,28 +12,35 @@
 #include "../GenericTree.h"
 #include "../GenericTreeExercises.h"
 
-
-TEST_CASE("Displaying manual test output", "[weight=0]") {
+TEST_CASE("Displaying manual test output", "[weight=0]")
+{
   treeFactoryTest();
   traversalTest();
 }
 
-TEST_CASE("Testing treeFactory preliminaries", "[weight=1]") {
+TEST_CASE("Testing treeFactory preliminaries", "[weight=1]")
+{
   GenericTree<int> tree(9999);
+  std::cout << "test tree: " << tree << std::endl;
   treeFactory(tree);
   auto root = tree.getRootPtr();
-  SECTION("Root should not be null") {
+  std::cout << "test root: " << root << std::endl;
+  SECTION("Root should not be null")
+  {
     REQUIRE(nullptr != root);
   }
-  SECTION("Root data should remove the previous setting") {
+  SECTION("Root data should remove the previous setting")
+  {
     REQUIRE(root);
     REQUIRE(9999 != root->data);
   }
-  SECTION("Root data should be 4") {
+  SECTION("Root data should be 4")
+  {
     REQUIRE(root);
     REQUIRE(4 == root->data);
   }
-  SECTION("Deepest data should be 42") {
+  SECTION("Deepest data should be 42")
+  {
     REQUIRE(root);
     REQUIRE(root->childrenPtrs.at(0));
     REQUIRE(root->childrenPtrs.at(0)->childrenPtrs.at(0));
@@ -42,7 +49,8 @@ TEST_CASE("Testing treeFactory preliminaries", "[weight=1]") {
   }
 }
 
-TEST_CASE("Testing treeFactory further", "[weight=1]") {
+TEST_CASE("Testing treeFactory further", "[weight=1]")
+{
 
   std::string exemplarTreeStr = "4\n";
   exemplarTreeStr += "|\n";
@@ -59,12 +67,14 @@ TEST_CASE("Testing treeFactory further", "[weight=1]") {
   treeFactory(tree);
   std::stringstream output;
   output << tree;
-  SECTION("Trees should match") {
+  SECTION("Trees should match")
+  {
     REQUIRE(output.str() == exemplarTreeStr);
   }
 }
 
-TEST_CASE("Testing traverseLevels", "[weight=2]"){
+TEST_CASE("Testing traverseLevels", "[weight=2]")
+{
   // This is the tree from exampleTree2() in main.cpp
   // std::cout << "[Test 2] Expected output:" << std::endl
   //   << "A B D J K C E I L F G M H" << std::endl;
@@ -83,12 +93,13 @@ TEST_CASE("Testing traverseLevels", "[weight=2]"){
   std::vector<std::string> tree2_results = traverseLevels(tree2);
   // std::cout << "Your traverseLevels output:" << std::endl;
   std::stringstream outstream;
-  for (auto result : tree2_results) {
+  for (auto result : tree2_results)
+  {
     outstream << result << " ";
   }
   auto student_traversal = outstream.str();
-  SECTION("Should do correct traversal on tree from exampleTree2()") {
+  SECTION("Should do correct traversal on tree from exampleTree2()")
+  {
     REQUIRE(expected_traversal == student_traversal);
   }
 }
-
